@@ -38,9 +38,21 @@ public class DemoController {
     }
 
     @Transactional
-    @PostMapping(path = "/delete/{desc}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/delete-native-sql/{desc}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteByDescription(@PathVariable("desc") String desc) {
         userRepository.deleteNativeByDescription(desc);
+    }
+
+    @Transactional
+    @PostMapping(path = "/delete-built-in/{desc}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteAutoByDescription(@PathVariable("desc") String desc) {
+        userRepository.deleteByDescription(desc);
+    }
+
+    @Transactional
+    @PostMapping(path = "/delete-by-id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void deleteById(@PathVariable("id") String id) {
+        userRepository.deleteById(id);
     }
 
 }

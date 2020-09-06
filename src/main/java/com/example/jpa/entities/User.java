@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "USER")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements SimpleInsertEntity<String> {
+public class User extends AbstractEntity<String> {
 
     @Id
     @Getter
