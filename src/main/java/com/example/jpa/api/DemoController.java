@@ -31,8 +31,8 @@ public class DemoController {
     @PostMapping(path = "/save-all", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void saveAll(@RequestBody List<User> users) {
         userRepository.deleteAllInBatch();
-        List<User> list = IntStream.range(0, 1000)
-                .mapToObj(i -> new User("foo" + i, "desc"))
+        List<User> list = IntStream.range(0, 5)
+                .mapToObj(i -> new User("foo" + i, "address", "desc"))
                 .collect(Collectors.toList());
         userRepository.saveAll(list);
     }
@@ -52,7 +52,7 @@ public class DemoController {
     @Transactional
     @PostMapping(path = "/delete-by-id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteById(@PathVariable("id") String id) {
-        userRepository.deleteById(id);
+        userRepository.deleteById(new User.Key(id, "address"));
     }
 
 }
